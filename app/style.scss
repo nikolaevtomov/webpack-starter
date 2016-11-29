@@ -1,8 +1,7 @@
+@import "./containers/app-container";
+@import "./components/about";
+@import "./components/home";
 
 body {
   background: #999999;
-}
-
-h2 {
-  color: blue;
 }

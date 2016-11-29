@@ -2,9 +2,10 @@
   "name": "webpack-starter",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "app/index.js",
   "scripts": {
-    "dev": "webpack-dev-server --progress --colors --inline --hot"
+    "dev": "webpack-dev-server --progress --colors --hot",
+    "build": "webpack NODE_ENV=production -p --progress --colors --profile"
   },
   "author": "",
   "license": "ISC",
@@ -19,6 +20,7 @@
     "html-loader": "^0.4.4",
     "node-sass": "^3.11.2",
     "postcss-loader": "^1.1.0",
+    "react-hot-loader": "^3.0.0-beta.6",
     "sass-loader": "^4.0.2",
     "style-loader": "^0.13.1",
     "webpack": "^1.13.3",

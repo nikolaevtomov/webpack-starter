@@ -1,12 +1,24 @@
+var webpack = require("webpack");
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
+
+const nodeEnv = process.env.NODE_ENV || 'development';
+const isProd = nodeEnv === 'production';
 
 module.exports = {
 
+  devtool: "eval",
   context: __dirname + "/app",
-  entry: "./index.js",
+
+  entry: [
+    'webpack-dev-server/client?http://0.0.0.0:8080',
+    'webpack/hot/only-dev-server',
+    'react-hot-loader/patch',
+    './index.js'
+  ],
+
   output: {
     filename: "/bundle.js",
-    publicPath: '/',
+    publicPath: "/",
     path: __dirname + "/dist"
   },
 
@@ -15,6 +27,7 @@ module.exports = {
       {
         test: /.js?$/,
         loader: "babel?cacheDirectory=true",
+        include: __dirname + "/app",
         exclude: /(node_modules)/
       },
       { test: /\.css$/, loader: ExtractTextPlugin.extract("style!css") },
@@ -24,7 +37,10 @@ module.exports = {
   },
 
   plugins: [
-    new ExtractTextPlugin("bundle.css")
+    new ExtractTextPlugin("bundle.css"),
+    new webpack.DefinePlugin({
+      'process.env': { NODE_ENV: JSON.stringify(nodeEnv) }
+    })
   ],
 
   devServer: {
